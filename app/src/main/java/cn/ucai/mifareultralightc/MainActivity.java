@@ -4,8 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.nfc.NfcAdapter;
 import android.os.Build;
@@ -51,6 +53,40 @@ public class MainActivity extends Activity {
         bind = ButterKnife.bind(this);
         mAppVersion.setText(getString(R.string.app_version)+ ": " + Common.getVersionCode());
         checkNfcPermissions();
+        showUsageNotice();
+    }
+
+    private void showUsageNotice() {
+        // Show first usage notice.
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        final SharedPreferences.Editor sharedEditor = sharedPref.edit();
+        boolean isFirstRun = sharedPref.getBoolean("is_first_run", true);
+        if (isFirstRun) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_first_run_title)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(R.string.dialog_first_run)
+                    .setPositiveButton(R.string.action_ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            if (Common.IS_DONATE_VERSION) {
+                                mResume = true;
+                                checkNfc();
+                            }
+                            sharedEditor.putBoolean("is_first_run", false);
+                            sharedEditor.apply();
+                        }
+                    })
+                    .show();
+            mResume = false;
+        }
     }
 
     private void checkNfcPermissions() {
