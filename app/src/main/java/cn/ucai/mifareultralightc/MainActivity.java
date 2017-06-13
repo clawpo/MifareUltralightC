@@ -14,6 +14,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -54,6 +56,48 @@ public class MainActivity extends Activity {
         mAppVersion.setText(getString(R.string.app_version)+ ": " + Common.getVersionCode());
         checkNfcPermissions();
         showUsageNotice();
+        checkMIFAREClassicSupport();
+    }
+
+    private void checkMIFAREClassicSupport() {
+        // Check if there is MIFARE Classic support.
+        if (!Common.useAsEditorOnly() && !Common.hasMifareClassicSupport()) {
+            // Disable read/write tag options.
+            mReadTag.setEnabled(false);
+            mWriteTag.setEnabled(false);
+            CharSequence styledText = Html.fromHtml(
+                    getString(R.string.dialog_no_mfc_support_device));
+            AlertDialog ad = new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_no_mfc_support_device_title)
+                    .setMessage(styledText)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(R.string.action_exit_app,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                    .setNegativeButton(R.string.action_continue,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    mResume = true;
+                                    checkNfc();
+                                }
+                            })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            finish();
+                        }
+                    })
+                    .show();
+            // Make links clickable.
+            ((TextView)ad.findViewById(android.R.id.message)).setMovementMethod(
+                    LinkMovementMethod.getInstance());
+            mResume = false;
+        }
     }
 
     private void showUsageNotice() {
