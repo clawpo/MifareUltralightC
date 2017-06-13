@@ -54,7 +54,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:drawableTop="@drawable/read_tag"
-                    android:onClick="onShowReadTag"
                     android:text="@string/action_read_tag" />
 
                 <Button
@@ -64,7 +63,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:drawableTop="@drawable/write_tag"
-                    android:onClick="onShowWriteTag"
                     android:text="@string/action_write_tag" />
 
             </LinearLayout>
@@ -81,7 +79,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:drawableTop="@drawable/edit_dump"
-                    android:onClick="onOpenTagDumpEditor"
                     android:text="@string/action_edit_tag_dump" />
 
                 <Button
@@ -91,7 +88,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:drawableTop="@drawable/edit_keys"
-                    android:onClick="onOpenKeyEditor"
                     android:text="@string/action_edit_key_dump" />
 
             </LinearLayout>
@@ -108,7 +104,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:drawableTop="@drawable/tools"
-                    android:onClick="onShowTools"
                     android:text="@string/action_tools" />
                 
                 <Button
@@ -118,7 +113,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:drawableTop="@drawable/help_and_info"
-                    android:onClick="onShowHelp"
                     android:text="@string/action_help" />
 
             </LinearLayout>
