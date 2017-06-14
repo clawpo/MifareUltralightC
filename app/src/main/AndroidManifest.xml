@@ -10,18 +10,126 @@
         android:required="true" />
 
     <application
+        android:name=".Common"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- NFC Tech Filter -->
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
         </activity>
+        <activity
+            android:name=".KeyMapCreator"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:icon="@drawable/map_keys_to_sector"
+            android:label="@string/title_activity_create_key_map" >
+        </activity>
+        <!--<activity-->
+            <!--android:name=".DumpEditor"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:icon="@drawable/edit_dump"-->
+            <!--android:label="@string/title_activity_dump_editor" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".FileChooser"-->
+            <!--android:icon="@drawable/open"-->
+            <!--android:label="@string/title_activity_file_chooser" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".AccessConditionDecoder"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/access_conditions"-->
+            <!--android:label="@string/title_activity_access_conditions" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".ValueBlocksToInt"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/value_block_to_int"-->
+            <!--android:label="@string/title_activity_value_blocks" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".WriteTag"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:icon="@drawable/write_tag"-->
+            <!--android:label="@string/title_activity_write_tag" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".ReadTag"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:icon="@drawable/read_tag"-->
+            <!--android:label="@string/title_activity_read_tag" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".KeyEditor"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:icon="@drawable/edit_keys"-->
+            <!--android:label="@string/title_activity_key_editor" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".HelpAndInfo"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/help_and_info"-->
+            <!--android:label="@string/title_activity_help" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".HexToAscii"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/hex_to_ascii"-->
+            <!--android:label="@string/title_activity_hex_to_ascii" >-->
+        <!--</activity>-->
+        <activity
+            android:name=".TagInfoTool"
+            android:configChanges="orientation|screenSize"
+            android:icon="@drawable/tag_info"
+            android:label="@string/title_activity_tag_info" >
+        </activity>
+        <!--<activity-->
+            <!--android:name=".ValueBlockTool"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/value_block_tool"-->
+            <!--android:label="@string/title_activity_value_block_tool" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".AccessConditionTool"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/access_condition_tool"-->
+            <!--android:label="@string/title_activity_access_condition_tool" >-->
+        <!--</activity>-->
+        <activity
+            android:name=".Preferences"
+            android:configChanges="orientation|screenSize"
+            android:icon="@drawable/preferences"
+            android:label="@string/title_activity_preferences" >
+        </activity>
+        <!--<activity-->
+            <!--android:name=".DiffTool"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/diff_tool"-->
+            <!--android:label="@string/title_activity_diff_tool" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".BccTool"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:icon="@drawable/bcc_tool"-->
+            <!--android:label="@string/title_activity_bcc_tool" >-->
+        <!--</activity>-->
     </application>
 
 </manifest>
