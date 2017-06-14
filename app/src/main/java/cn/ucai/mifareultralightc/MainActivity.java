@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.nfc.NfcAdapter;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,6 +46,8 @@ public class MainActivity extends Activity {
     @BindView(R.id.buttonMainReadTag) Button mReadTag;
     @BindView(R.id.buttonMainWriteTag) Button mWriteTag;
     @BindView(R.id.textViewMainFooter) TextView mAppVersion;
+    @BindView(R.id.buttonMainEditKeyDump) Button mKeyEditor;
+    @BindView(R.id.buttonMainEditCardDump) Button mDumpEditor;
     private AlertDialog mEnableNfc;
     private boolean mResume = true;
     private Intent mOldIntent = null;
@@ -164,8 +168,8 @@ public class MainActivity extends Activity {
     private void enableMenuButtons(boolean enable) {
         mWriteTag.setEnabled(enable);
         mReadTag.setEnabled(enable);
-//        mKeyEditor.setEnabled(enable);
-//        mDumpEditor.setEnabled(enable);
+        mKeyEditor.setEnabled(enable);
+        mDumpEditor.setEnabled(enable);
     }
 
     /**
@@ -291,6 +295,32 @@ public class MainActivity extends Activity {
     void onShowWriteTag() {
 
     }
+    /**
+     * If resuming is allowed because all dependencies from
+     * {@link #onCreate(Bundle)} are satisfied, call
+     * {@link #checkNfc()}
+     * @see #onCreate(Bundle)
+     * @see #checkNfc()
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (Common.hasWritePermissionToExternalStorage(this)) {
+            if (!Common.hasMifareClassicSupport() || Common.useAsEditorOnly()) {
+                mDumpEditor.setEnabled(true);
+                mKeyEditor.setEnabled(true);
+            } else {
+                enableMenuButtons(true);
+            }
+        } else {
+            enableMenuButtons(false);
+        }
+
+        if (mResume) {
+            checkNfc();
+        }
+    }
 
     /**
      * Check if NFC adapter is enabled. If not, show the user a dialog and let
@@ -384,7 +414,57 @@ public class MainActivity extends Activity {
                             }
                         }).create();
     }
+    /**
+     * Disable NFC foreground dispatch system.
+     * @see Common#disableNfcForegroundDispatch(Activity)
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        Common.disableNfcForegroundDispatch(this);
+    }
 
+    /**
+     * Handle new Intent as a new tag Intent and if the tag/device does not
+     * support MIFARE Classic, then run {@link TagInfoTool}.
+     * @see Common#treatAsNewTag(Intent, android.content.Context)
+     * @see TagInfoTool
+     */
+    @Override
+    public void onNewIntent(Intent intent) {
+        int typeCheck = Common.treatAsNewTag(intent, this);
+        if (typeCheck == -1 || typeCheck == -2) {
+            // Device or tag does not support MIFARE Classic.
+            // Run the only thing that is possible: The tag info tool.
+            Intent i = new Intent(this, TagInfoTool.class);
+            startActivity(i);
+        }
+    }
+    /**
+     * Handle answered permission requests. Until now, the app only asks for
+     * the permission to access the external storage.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,
+                permissions, grantResults);
+
+        switch (requestCode) {
+            case REQUEST_WRITE_STORAGE_CODE:
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initFolders();
+                    mDumpEditor.setEnabled(true);
+                    mKeyEditor.setEnabled(true);
+                } else {
+                    Toast.makeText(this, R.string.info_write_permission,
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
+
+        }
+    }
 
     @Override
     protected void onDestroy() {
