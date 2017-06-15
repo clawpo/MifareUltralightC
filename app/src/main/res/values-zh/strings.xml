@@ -193,6 +193,7 @@
     <string name="text_block_read_only">块是只读的</string>
     <string name="text_block_size">块大小</string>
     <string name="text_caption_title">标题</string>
+    <string name="text_mifare_ultralight_context">内容：</string>
     <string name="text_choose_dump_to_write">选定要写的转储：</string>
     <string name="text_choose_key_file">选择一些密钥文件：</string>
     <string name="text_chooser_info_text">选定一个文件:</string>
@@ -214,7 +215,9 @@
     <string name="text_keys_not_known">Keys (A and B) 未知</string>
     <string name="text_keys_read_only">Keys (A and B) 只读</string>
     <string name="text_mem_size">内存大小</string>
+    <string name="text_max_transceive_length">最大收发长度</string>
     <string name="text_mf_info">MIFARE Classic 信息</string>
+    <string name="text_mfu_info">MIFARE Ultralight 信息</string>
     <string name="text_never">永不</string>
     <string name="text_no_files_in_chooser">没发现文件</string>
     <string name="text_no_key_io_error">没密钥发现(或死扇区)</string>

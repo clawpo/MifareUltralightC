@@ -111,9 +111,11 @@
     <string name="text_no_tag">There is no MIFARE Classic tag.</string>
     <string name="text_generic_info">Generic Info</string>
     <string name="text_mf_info">MIFARE Classic Info</string>
+    <string name="text_mfu_info">MIFARE Ultralight Info</string>
     <string name="text_rf_tech">RF Technology</string>
     <string name="text_rf_tech_14a">ISO/IEC 14443, Type A</string>
     <string name="text_atqa">ATQA</string>
+    <string name="text_max_transceive_length">max transceive length</string>
     <string name="text_sak">SAK</string>
     <string name="text_ats">ATS</string>
     <string name="text_tag_type_and_manuf">Tag Type and Manufacturer</string>
@@ -146,6 +148,7 @@
     <string name="text_dump_2">Dump 2 (B):</string>
     <string name="text_a">A:</string>
     <string name="text_b">B:</string>
+    <string name="text_mifare_ultralight_context">Context:</string>
     <string name="text_dump_from_editor">Dump from Editor</string>
     <string name="text_incr_decr_value_block">Incr./Decr. Value Block</string>
     <string name="text_increment">Increment</string>

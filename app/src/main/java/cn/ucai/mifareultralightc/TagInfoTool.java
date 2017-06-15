@@ -25,11 +25,13 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
 import android.nfc.tech.MifareClassic;
+import android.nfc.tech.MifareUltralight;
 import android.nfc.tech.NfcA;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -43,7 +45,7 @@ import android.widget.Toast;
  * @author Gerhard Klostermeier
  */
 public class TagInfoTool extends BasicActivity {
-
+    private static final String TAG = "TagInfoTool";
     LinearLayout mLayout;
     TextView mErrorMessage;
     int mMFCSupport;
@@ -117,10 +119,12 @@ public class TagInfoTool extends BasicActivity {
      * @param tag A Tag from an NFC Intent.
      */
     private void updateTagInfo(Tag tag) {
+        Log.e(TAG,"updateTagInfo,tag="+tag);
 
         if (tag != null) {
             // Check for MIFARE Classic support.
             mMFCSupport = Common.checkMifareClassicSupport(tag, this);
+            Log.e(TAG,"updateTagInfo,mMFCSupport="+mMFCSupport);
 
             mLayout.removeAllViews();
             // Display generic info.
@@ -265,8 +269,40 @@ public class TagInfoTool extends BasicActivity {
             } else if (mMFCSupport == -2) {
                 // The tag does not support MIFARE Classic.
                 // Set error message.
-                mErrorMessage.setText(R.string.text_no_mfc_support_tag);
-                layout.setVisibility(View.VISIBLE);
+//                mErrorMessage.setText(R.string.text_no_mfc_support_tag);
+//                layout.setVisibility(View.VISIBLE);
+
+
+                // Display MIFARE Classic info.
+                // Create views and add them to the layout.
+                TextView headerMifareInfo = new TextView(this);
+                headerMifareInfo.setText(Common.colorString(
+                        getString(R.string.text_mfu_info),
+                        getResources().getColor(R.color.blue)));
+                headerMifareInfo.setBackgroundColor(
+                        getResources().getColor(R.color.dark_gray));
+                headerMifareInfo.setTextAppearance(
+                        this, android.R.style.TextAppearance_Large);
+                headerMifareInfo.setGravity(Gravity.CENTER_HORIZONTAL);
+                headerMifareInfo.setPadding(pad, pad, pad, pad);
+                mLayout.addView(headerMifareInfo);
+                TextView mifareInfo = new TextView(this);
+                mifareInfo.setPadding(pad, pad, pad, pad);
+                mifareInfo.setTextAppearance(this,
+                        android.R.style.TextAppearance_Medium);
+                mLayout.addView(mifareInfo);
+
+                // Get MIFARE info and set these as text.
+                MifareUltralight mifareUltralight = MifareUltralight.get(tag);
+                String maxTransceiveLength = "" + mifareUltralight.getMaxTransceiveLength();
+                mifareInfo.setText(TextUtils.concat(
+                        Common.colorString(getString(
+                                R.string.text_max_transceive_length) + ":", hc),
+                        "\n", maxTransceiveLength, " byte\n", "\n",
+                        Common.colorString(getString(
+                                R.string.text_mifare_ultralight_context) + ":", hc),
+                        "\n", Common.readTag(mifareUltralight)));
+                layout.setVisibility(View.GONE);
             }
         } else {
             // There is no Tag.

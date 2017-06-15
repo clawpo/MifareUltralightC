@@ -32,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
+import android.nfc.tech.MifareUltralight;
 import android.nfc.tech.NfcA;
 import android.os.Build;
 import android.os.Environment;
@@ -51,6 +52,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -1448,5 +1450,64 @@ public class Common extends Application {
         return mUseAsEditorOnly;
     }
 
+    public static void writeTag(Tag tag){
+        String[] techlist=tag.getTechList();
+        if(Arrays.toString(techlist).contains("MifareUltralight")){
+            MifareUltralight mifareUltralight=MifareUltralight.get(tag);
+            try {
+                mifareUltralight.connect();
+                Toast.makeText(mAppContext, "开始写", Toast.LENGTH_SHORT).show();
+                mifareUltralight.writePage(4, "你好".getBytes(Charset.forName("GB2312")));
+                mifareUltralight.writePage(5, "中国".getBytes(Charset.forName("GB2312")));
+                mifareUltralight.writePage(6, "人们".getBytes(Charset.forName("GB2312")));
+                mifareUltralight.writePage(7, "百姓".getBytes(Charset.forName("GB2312")));
+
+
+                Toast.makeText(mAppContext, "写入完成", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }finally{
+                try {
+                    mifareUltralight.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            Toast.makeText(mAppContext, "不是MifareUltralightle类型", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    public static String readTag(MifareUltralight mifareUltralight){
+        try {
+            mifareUltralight.connect();
+
+            byte[] data=mifareUltralight.readPages(4);
+            return new String(data, Charset.forName("GB2312"));
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }finally{
+            try {
+                mifareUltralight.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static String readTag(Tag tag){
+        String[] techlist=tag.getTechList();
+        if(Arrays.toString(techlist).contains("MifareUltralight")){
+            return readTag(MifareUltralight.get(tag));
+        }else{
+            Toast.makeText(mAppContext, "不是MifareUltralightle类型", Toast.LENGTH_SHORT).show();
+        }
+        return null;
+    }
 
 }
