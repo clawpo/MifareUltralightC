@@ -22,11 +22,23 @@ public class ProjectDao {
         dbMgr = ProjectDBManager.getInstance(context);
     }
 
-    public void setGiftList(List<Project> list){
-        dbMgr.saveGiftList(list);
+    public void setProjectList(List<Project> list){
+        dbMgr.saveProjectList(list);
     }
 
     public Map<Integer, Project> getGiftList(){
-        return dbMgr.getGiftList();
+        return dbMgr.getProjectList();
+    }
+
+    public Project getProjectById(int id){
+        return dbMgr.getProject(id);
+    }
+
+    public Project getProjectByName(String name){
+        return dbMgr.getProject(name);
+    }
+
+    public long saveProject(Project project){
+        return dbMgr.saveProject(project);
     }
 }

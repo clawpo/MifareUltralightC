@@ -4,11 +4,23 @@ package cn.ucai.mifareultralightc.local;
  * Created by clawpo on 2017/6/16.
  */
 
-class Project {
+public class Project {
     int id;
     String name;
     int type;
     String time;
+
+    public Project(String name) {
+        this.name = name;
+        this.setType(0);
+        this.setTime(String.valueOf(System.currentTimeMillis()));
+    }
+
+    public Project(String name, int type) {
+        this.name = name;
+        this.type = type;
+        this.setTime(String.valueOf(System.currentTimeMillis()));
+    }
 
     public Project(int id, String name, int type, String time) {
         this.id = id;

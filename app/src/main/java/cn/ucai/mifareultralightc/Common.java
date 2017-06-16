@@ -56,6 +56,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import cn.ucai.mifareultralightc.local.ProjectHelper;
+
 import static cn.ucai.mifareultralightc.Preferences.Preference.UseInternalStorage;
 
 /**
@@ -195,6 +197,7 @@ public class Common extends Application {
         super.onCreate();
         mAppContext = getApplicationContext();
         mScale = getResources().getDisplayMetrics().density;
+        ProjectHelper.getInstance().init(mAppContext);
 
         try {
             mVersionCode = getPackageManager().getPackageInfo(
