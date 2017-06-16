@@ -199,6 +199,10 @@
     <string name="text_chooser_info_text">选定一个文件:</string>
     <string name="text_copy">复制</string>
     <string name="text_data">数据</string>
+    <string name="text_data1">数据1</string>
+    <string name="text_data2">数据2</string>
+    <string name="text_data3">数据3</string>
+    <string name="text_data4">数据4</string>
     <string name="text_decrement">减值</string>
     <string name="text_dump_1">转储 1 (A):</string>
     <string name="text_dump_2">转储 2 (B):</string>

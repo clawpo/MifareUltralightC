@@ -293,7 +293,8 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.buttonMainWriteTag)
     void onShowWriteTag() {
-
+        Intent intent = new Intent(this, WriteTag.class);
+        startActivity(intent);
     }
     /**
      * If resuming is allowed because all dependencies from

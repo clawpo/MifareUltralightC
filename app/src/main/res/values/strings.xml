@@ -77,6 +77,10 @@
     <string name="text_sector_range_all">All</string>
     <string name="text_update_colors">Update Colors</string>
     <string name="text_data">Data</string>
+    <string name="text_data1">Data1</string>
+    <string name="text_data2">Data2</string>
+    <string name="text_data3">Data3</string>
+    <string name="text_data4">Data4</string>
     <string name="text_value">Value</string>
     <string name="text_write_dump_info">Write a dump (or some sectors of it) to
         a tag. Blocks containing unknown data (---) will be skipped!</string>

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.Hashtable;
 import java.util.List;
@@ -20,10 +21,10 @@ public class ProjectDBManager {
 
     private ProjectDBManager(Context context){
         dbHelper = ProjectDBOpenHelper.getInstance(context);
-        dbMgr = new ProjectDBManager(context);
     }
 
     public static synchronized ProjectDBManager getInstance(Context context){
+        Log.e(TAG,"ProjectDBManager getInstance,dbMgr="+dbMgr);
         if(dbMgr == null){
             dbMgr = new ProjectDBManager(context);
         }

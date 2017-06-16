@@ -64,12 +64,12 @@
             <!--android:icon="@drawable/value_block_to_int"-->
             <!--android:label="@string/title_activity_value_blocks" >-->
         <!--</activity>-->
-        <!--<activity-->
-            <!--android:name=".WriteTag"-->
-            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-            <!--android:icon="@drawable/write_tag"-->
-            <!--android:label="@string/title_activity_write_tag" >-->
-        <!--</activity>-->
+        <activity
+            android:name=".WriteTag"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:icon="@drawable/write_tag"
+            android:label="@string/title_activity_write_tag" >
+        </activity>
         <!--<activity-->
             <!--android:name=".ReadTag"-->
             <!--android:configChanges="keyboardHidden|orientation|screenSize"-->

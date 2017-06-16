@@ -1483,12 +1483,28 @@ public class Common extends Application {
         }
 
     }
-    public static String readTag(MifareUltralight mifareUltralight){
+    public static String readTagSub08(byte[] data){
+        return byte2HexString(data).substring(0, 8);
+    }
+    public static String[] readTag(MifareUltralight mifareUltralight){
         try {
             mifareUltralight.connect();
+            String[] data = new String[4];
+            for (int i=0;i<4;i++){
+                data[i] = readTagSub08(mifareUltralight.readPages(i+4));
+                Log.e(LOG_TAG,"readTag,data[i]="+data[i]);
+            }
+            return data;
 
-            byte[] data=mifareUltralight.readPages(4);
-            return new String(data, Charset.forName("GB2312"));
+//            byte[] data1=mifareUltralight.readPages(4);
+//            Log.e(LOG_TAG,"data1="+byte2HexString(data1)+",s="+byte2HexString(data1).substring(0, 8));
+//            byte[] data2=mifareUltralight.readPages(5);
+//            Log.e(LOG_TAG,"data2="+byte2HexString(data2)+",s="+byte2HexString(data2).substring(0, 8));
+//            byte[] data3=mifareUltralight.readPages(6);
+//            Log.e(LOG_TAG,"data3="+byte2HexString(data3)+",s="+byte2HexString(data3).substring(0, 8));
+//            byte[] data4=mifareUltralight.readPages(7);
+//            Log.e(LOG_TAG,"data4="+byte2HexString(data4)+",s="+byte2HexString(data4).substring(0, 8));
+//            return new String(data4, Charset.forName("GB2312"));
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -1503,7 +1519,7 @@ public class Common extends Application {
         return null;
     }
 
-    public static String readTag(Tag tag){
+    public static String[] readTag(Tag tag){
         String[] techlist=tag.getTechList();
         if(Arrays.toString(techlist).contains("MifareUltralight")){
             return readTag(MifareUltralight.get(tag));

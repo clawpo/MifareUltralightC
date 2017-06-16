@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Copyright 2013 Gerhard Klostermeier
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+-->
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewWriteTag"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WriteTag" >
+
+    <LinearLayout
+        android:id="@+id/linearLayoutWriteTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutWriteTagWriteBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:tag="write_block_layout" >
+
+            <!-- Dummy for preventing EditTexts to get focus on
+            Activity startup -->
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+            <TextView
+                android:id="@+id/textViewWriteTagData1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editTextWriteTagData1"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:padding="5dp"
+                android:text="@string/text_data1"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextWriteTagData1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/textViewWriteTagData1"
+                android:gravity="center_horizontal"
+                android:maxLength="2"
+                android:minEms="3" />
+
+            <TextView
+                android:id="@+id/textViewWriteTagData2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editTextWriteTagData2"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/textViewWriteTagData1"
+                android:padding="5dp"
+                android:text="@string/text_data2"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextWriteTagData2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editTextWriteTagData1"
+                android:layout_below="@id/editTextWriteTagData1"
+                android:layout_marginRight="5dp"
+                android:gravity="center_horizontal"
+                android:maxLength="2"
+                android:minEms="3" />
+
+            <TextView
+                android:id="@+id/textViewWriteTagData3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editTextWriteTagData3"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/textViewWriteTagData2"
+                android:padding="5dp"
+                android:text="@string/text_data3"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextWriteTagData3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editTextWriteTagData2"
+                android:layout_below="@id/editTextWriteTagData2"
+                android:inputType="textCapCharacters|textNoSuggestions"
+                android:maxLength="32" />
+
+            <TextView
+                android:id="@+id/textViewWriteTagData4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editTextWriteTagData4"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/textViewWriteTagData3"
+                android:padding="5dp"
+                android:text="@string/text_data4"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextWriteTagData4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editTextWriteTagData2"
+                android:layout_below="@id/editTextWriteTagData3"
+                android:inputType="textCapCharacters|textNoSuggestions"
+                android:maxLength="32" />
+
+            <Button
+                android:id="@+id/buttonWriteTagBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextWriteTagData4"
+                android:onClick="onWriteBlock"
+                android:text="@string/action_write_block" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

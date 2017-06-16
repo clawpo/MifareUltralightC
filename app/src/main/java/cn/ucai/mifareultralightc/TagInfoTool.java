@@ -295,14 +295,26 @@ public class TagInfoTool extends BasicActivity {
                 // Get MIFARE info and set these as text.
                 MifareUltralight mifareUltralight = MifareUltralight.get(tag);
                 String maxTransceiveLength = "" + mifareUltralight.getMaxTransceiveLength();
-                mifareInfo.setText(TextUtils.concat(
-                        Common.colorString(getString(
-                                R.string.text_max_transceive_length) + ":", hc),
-                        "\n", maxTransceiveLength, " byte\n", "\n",
-                        Common.colorString(getString(
-                                R.string.text_mifare_ultralight_context) + ":", hc),
-                        "\n", Common.readTag(mifareUltralight)));
-                layout.setVisibility(View.GONE);
+                String[] data = Common.readTag(mifareUltralight);
+                if (data!=null){
+                    mifareInfo.setText(TextUtils.concat(
+                            Common.colorString(getString(
+                                    R.string.text_max_transceive_length) + ":", hc),
+                            "\n", maxTransceiveLength, " byte\n",
+                            Common.colorString(getString(
+                                    R.string.text_data1) + ":", hc),
+                            "\n", data[0], "\n",
+                            Common.colorString(getString(
+                                    R.string.text_data2) + ":", hc),
+                            "\n", data[1], "\n",
+                            Common.colorString(getString(
+                                    R.string.text_data3) + ":", hc),
+                            "\n", data[2], "\n",
+                            Common.colorString(getString(
+                                    R.string.text_data4) + ":", hc),
+                            "\n", data[3], "\n"));
+                    layout.setVisibility(View.GONE);
+                }
             }
         } else {
             // There is no Tag.
