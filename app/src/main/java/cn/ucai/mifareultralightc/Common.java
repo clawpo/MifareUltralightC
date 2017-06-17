@@ -52,7 +52,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -1453,19 +1452,32 @@ public class Common extends Application {
         return mUseAsEditorOnly;
     }
 
-    public static void writeTag(Tag tag){
-        String[] techlist=tag.getTechList();
+    public static void writeTag(String[] data){
+        if (mTag!=null && data!=null){
+//            ProjectHelper.getInstance().getDataFromDB(data);
+            writeTag(mTag,ProjectHelper.getInstance().getDataFromDB(data));
+        } else {
+            // Error. The tag is gone.
+            Toast.makeText(mAppContext, R.string.info_no_tag_found,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public static void writeTag(Tag tag,String[] data){
+        Log.e(LOG_TAG,"writeTag begin....");
+        String[] techlist=mTag.getTechList();
         if(Arrays.toString(techlist).contains("MifareUltralight")){
-            MifareUltralight mifareUltralight=MifareUltralight.get(tag);
+            MifareUltralight mifareUltralight=MifareUltralight.get(mTag);
             try {
                 mifareUltralight.connect();
+                Log.e(LOG_TAG,"writeTag begin....开始写,"+data.length);
                 Toast.makeText(mAppContext, "开始写", Toast.LENGTH_SHORT).show();
-                mifareUltralight.writePage(4, "你好".getBytes(Charset.forName("GB2312")));
-                mifareUltralight.writePage(5, "中国".getBytes(Charset.forName("GB2312")));
-                mifareUltralight.writePage(6, "人们".getBytes(Charset.forName("GB2312")));
-                mifareUltralight.writePage(7, "百姓".getBytes(Charset.forName("GB2312")));
+                for (int i = 0; i < data.length; i++) {
+                    Log.e(LOG_TAG,"writeTag begin....开始写"+i+",data="+data[i]+",byte="+data[i].getBytes());
+                    mifareUltralight.writePage(i+4, data[i].getBytes());
+                }
 
-
+                Log.e(LOG_TAG,"writeTag begin....写入完成");
                 Toast.makeText(mAppContext, "写入完成", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 // TODO Auto-generated catch block

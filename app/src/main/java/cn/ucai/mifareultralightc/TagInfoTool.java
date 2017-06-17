@@ -38,6 +38,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.ucai.mifareultralightc.local.ProjectHelper;
+
 /**
  * Display tag info like technology, size, sector count, etc.
  * This is the only thing a user can do with a device that does not support
@@ -303,16 +305,16 @@ public class TagInfoTool extends BasicActivity {
                             "\n", maxTransceiveLength, " byte\n",
                             Common.colorString(getString(
                                     R.string.text_data1) + ":", hc),
-                            "\n", data[0], "\n",
+                            "\n", data[0], "-",ProjectHelper.getInstance().getData(data[0]),"\n",
                             Common.colorString(getString(
                                     R.string.text_data2) + ":", hc),
-                            "\n", data[1], "\n",
+                            "\n", data[1], "-",ProjectHelper.getInstance().getData(data[1]),"\n",
                             Common.colorString(getString(
                                     R.string.text_data3) + ":", hc),
-                            "\n", data[2], "\n",
+                            "\n", data[2], "-",ProjectHelper.getInstance().getData(data[2]),"\n",
                             Common.colorString(getString(
                                     R.string.text_data4) + ":", hc),
-                            "\n", data[3], "\n"));
+                            "\n", data[3], "-",ProjectHelper.getInstance().getData(data[3]),"\n"));
                     layout.setVisibility(View.GONE);
                 }
             }

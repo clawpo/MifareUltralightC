@@ -62,9 +62,17 @@ public class WriteTagProject extends BasicActivity {
         }
     }
 
-
     public void onWriteBlock(View view) {
+        Common.writeTag(getInputData());
+    }
 
+    private String[] getInputData(){
+        String[] data = new String[4];
+        data[0] = mData1.getText().toString();
+        data[1] = mData2.getText().toString();
+        data[2] = mData3.getText().toString();
+        data[3] = mData4.getText().toString();
+        return data;
     }
 
     @Override

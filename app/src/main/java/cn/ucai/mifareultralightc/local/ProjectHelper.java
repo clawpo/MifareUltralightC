@@ -1,6 +1,7 @@
 package cn.ucai.mifareultralightc.local;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,12 @@ public class ProjectHelper {
         projectDao = new ProjectDao(context);
     }
 
+    public String getData(String id){
+        Log.e(TAG,"getData,id="+id);
+//        return projectDao.getProjectById(getHexString2int(id)).getName();
+        return id;
+    }
+
     public int saveProjectInfo(String name){
         Project project = projectDao.getProjectByName(name);
         if (project!=null){
@@ -38,5 +45,46 @@ public class ProjectHelper {
             Project pro = new Project(name);
             return (int) projectDao.saveProject(pro);
         }
+    }
+
+    public String[] getDataFromDB(String[] data){
+        Log.e(TAG,"getDataFromDB,data.length="+data.length);
+        String[] resultData = null;
+        if (data!=null){
+            resultData = new String[4];
+            int temp = 0;
+            for (int i = 0; i < data.length; i++) {
+                if (data[i]==null|| data[i].equals("")){
+                    temp = 0;
+                }else {
+                    temp = saveProjectInfo(data[i]);
+                }
+                resultData[i] = getint2HexString(temp);
+                Log.e(TAG, "data[" + i + "]=" + data[i]
+                        + ",resultData[" + i + "]=" + resultData[i]
+                        + ",temp="+ temp);
+            }
+
+        }
+        return resultData;
+    }
+
+    private String getint2HexString(int data){
+        Log.e(TAG,"getHexString,data="+data);
+        try {
+            return String.format("%08X", data);
+        }catch (Exception e){
+            Log.e(TAG,"getint2HexString,e="+e);
+        }
+        return null;
+    }
+
+    private int getHexString2int(String data){
+        try {
+            return Integer.parseInt(data,16);
+        }catch (Exception e){
+            Log.e(TAG,"getHexString2int,e="+e);
+        }
+        return 0;
     }
 }
