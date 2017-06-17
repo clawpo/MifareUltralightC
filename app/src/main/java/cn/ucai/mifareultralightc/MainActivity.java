@@ -293,7 +293,7 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.buttonMainWriteTag)
     void onShowWriteTag() {
-        Intent intent = new Intent(this, WriteTag.class);
+        Intent intent = new Intent(this, WriteTagProject.class);
         startActivity(intent);
     }
     /**

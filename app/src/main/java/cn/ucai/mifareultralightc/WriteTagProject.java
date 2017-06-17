@@ -1,6 +1,8 @@
 package cn.ucai.mifareultralightc;
 
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -13,15 +15,16 @@ import butterknife.Unbinder;
  */
 
 public class WriteTagProject extends BasicActivity {
+    private static final String TAG = "WriteTagProject";
 
     @BindView(R.id.editTextWriteTagData1)
-    EditText mEditTextWriteTagData1;
+    EditText mData1;
     @BindView(R.id.editTextWriteTagData2)
-    EditText mEditTextWriteTagData2;
+    EditText mData2;
     @BindView(R.id.editTextWriteTagData3)
-    EditText mEditTextWriteTagData3;
+    EditText mData3;
     @BindView(R.id.editTextWriteTagData4)
-    EditText mEditTextWriteTagData4;
+    EditText mData4;
     Unbinder bind;
 
     // It is checked but the IDE don't get it.
@@ -31,6 +34,32 @@ public class WriteTagProject extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_tag_project);
         bind = ButterKnife.bind(this);
+        initData();
+    }
+
+    private void initData() {
+        Tag tag = Common.getTag();
+        if (tag!=null){
+            showData(Common.readTag(tag));
+        }else{
+            Log.e(TAG,"tag is null");
+//            finish();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    private void showData(String[] data) {
+        if (data!=null){
+            mData1.setText(data[0]);
+            mData2.setText(data[1]);
+            mData3.setText(data[2]);
+            mData4.setText(data[3]);
+        }
     }
 
 

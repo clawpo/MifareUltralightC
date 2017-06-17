@@ -65,7 +65,7 @@
             <!--android:label="@string/title_activity_value_blocks" >-->
         <!--</activity>-->
         <activity
-            android:name=".WriteTag"
+            android:name=".WriteTagProject"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:icon="@drawable/write_tag"
             android:label="@string/title_activity_write_tag" >

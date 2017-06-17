@@ -65,10 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="5dp"
-                android:layout_toRightOf="@id/textViewWriteTagData1"
-                android:gravity="center_horizontal"
-                android:maxLength="2"
-                android:minEms="3" />
+                android:layout_toRightOf="@id/textViewWriteTagData1"/>
 
             <TextView
                 android:id="@+id/textViewWriteTagData2"
@@ -87,10 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/editTextWriteTagData1"
                 android:layout_below="@id/editTextWriteTagData1"
-                android:layout_marginRight="5dp"
-                android:gravity="center_horizontal"
-                android:maxLength="2"
-                android:minEms="3" />
+                android:layout_marginRight="5dp"/>
 
             <TextView
                 android:id="@+id/textViewWriteTagData3"
@@ -108,9 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/editTextWriteTagData2"
-                android:layout_below="@id/editTextWriteTagData2"
-                android:inputType="textCapCharacters|textNoSuggestions"
-                android:maxLength="32" />
+                android:layout_below="@id/editTextWriteTagData2"/>
 
             <TextView
                 android:id="@+id/textViewWriteTagData4"
@@ -128,9 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/editTextWriteTagData2"
-                android:layout_below="@id/editTextWriteTagData3"
-                android:inputType="textCapCharacters|textNoSuggestions"
-                android:maxLength="32" />
+                android:layout_below="@id/editTextWriteTagData3"/>
 
             <Button
                 android:id="@+id/buttonWriteTagBlock"
