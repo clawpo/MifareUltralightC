@@ -433,7 +433,9 @@ public class MainActivity extends Activity {
      */
     @Override
     public void onNewIntent(Intent intent) {
+        Log.e("main","onNewIntent....");
         int typeCheck = Common.treatAsNewTag(intent, this);
+        Log.e("mian","onNewIntent,typeCheck="+typeCheck);
         if (typeCheck == -1 || typeCheck == -2) {
             // Device or tag does not support MIFARE Classic.
             // Run the only thing that is possible: The tag info tool.

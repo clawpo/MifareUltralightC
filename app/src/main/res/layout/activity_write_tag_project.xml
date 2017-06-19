@@ -67,66 +67,12 @@
                 android:layout_marginRight="5dp"
                 android:layout_toRightOf="@id/textViewWriteTagData1"/>
 
-            <TextView
-                android:id="@+id/textViewWriteTagData2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editTextWriteTagData2"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/textViewWriteTagData1"
-                android:padding="5dp"
-                android:text="@string/text_data2"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextWriteTagData2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/editTextWriteTagData1"
-                android:layout_below="@id/editTextWriteTagData1"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:id="@+id/textViewWriteTagData3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editTextWriteTagData3"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/textViewWriteTagData2"
-                android:padding="5dp"
-                android:text="@string/text_data3"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextWriteTagData3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/editTextWriteTagData2"
-                android:layout_below="@id/editTextWriteTagData2"/>
-
-            <TextView
-                android:id="@+id/textViewWriteTagData4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editTextWriteTagData4"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/textViewWriteTagData3"
-                android:padding="5dp"
-                android:text="@string/text_data4"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextWriteTagData4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/editTextWriteTagData2"
-                android:layout_below="@id/editTextWriteTagData3"/>
 
             <Button
                 android:id="@+id/buttonWriteTagBlock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextWriteTagData4"
+                android:layout_below="@+id/editTextWriteTagData1"
                 android:onClick="onWriteBlock"
                 android:text="@string/action_write_block" />
         </RelativeLayout>

@@ -31,10 +31,12 @@ public class ProjectHelper {
         projectDao = new ProjectDao(context);
     }
 
-    public String getData(String id){
-        Log.e(TAG,"getData,id="+id);
+    public String getData(String idString){
+        Log.e(TAG,"getData,id="+idString);
+        int id = getHexString2int(idString);
+        Project project = projectDao.getProjectById(id);
 //        return projectDao.getProjectById(getHexString2int(id)).getName();
-        return id;
+        return project!=null?project.getName():"";
     }
 
     public int saveProjectInfo(String name){

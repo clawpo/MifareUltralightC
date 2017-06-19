@@ -29,6 +29,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
@@ -36,6 +38,7 @@ import android.nfc.tech.MifareUltralight;
 import android.nfc.tech.NfcA;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
@@ -52,6 +55,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -1538,6 +1542,26 @@ public class Common extends Application {
         }else{
             Toast.makeText(mAppContext, "不是MifareUltralightle类型", Toast.LENGTH_SHORT).show();
         }
+        return null;
+    }
+
+    public static String readFromTag(Intent intent){
+        //从一个intent得到一个标签对象
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
+
+        Parcelable[] rawArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+        NdefMessage mNdefMsg = (NdefMessage)rawArray[0];
+        NdefRecord mNdefRecord = mNdefMsg.getRecords()[0];
+        try {
+            if(mNdefRecord != null){
+                String readResult = new String(mNdefRecord.getPayload(),"US-ASCII");
+                return readResult;
+            }
+        }
+        catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        };
         return null;
     }
 
