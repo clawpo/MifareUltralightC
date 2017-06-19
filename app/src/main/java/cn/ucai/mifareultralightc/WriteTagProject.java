@@ -22,6 +22,8 @@ public class WriteTagProject extends BasicActivity {
     @BindView(R.id.editTextWriteTagData1)
     EditText mData1;
     Unbinder bind;
+    @BindView(R.id.editTextWriteTagData2)
+    EditText mData2;
 
     // It is checked but the IDE don't get it.
     @SuppressWarnings("unchecked")
@@ -35,11 +37,11 @@ public class WriteTagProject extends BasicActivity {
 
     private void initData() {
         Tag tag = Common.getTag();
-        Log.e(TAG,"tag is "+tag);
-        if (tag!=null){
+        Log.e(TAG, "tag is " + tag);
+        if (tag != null) {
 //            showData(Common.readTag(tag));
-        }else{
-            Log.e(TAG,"tag is null");
+        } else {
+            Log.e(TAG, "tag is null");
 //            finish();
         }
     }
@@ -47,14 +49,14 @@ public class WriteTagProject extends BasicActivity {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e(TAG,"onResume...");
+        Log.e(TAG, "onResume...");
         initData();
     }
 
     private void showData(String data) {
-        Log.e(TAG,"showData,data="+data);
+        Log.e(TAG, "showData,data=" + data);
         String name = ProjectHelper.getInstance().getData(data);
-        if (name!=null){
+        if (name != null) {
             mData1.setText(name);
         }
     }
@@ -62,26 +64,26 @@ public class WriteTagProject extends BasicActivity {
     @Override
     public void onNewIntent(Intent intent) {
         int typeCheck = Common.treatAsNewTag(intent, this);
-        Log.e(TAG,"onNewIntent,typeCheck="+typeCheck);
+        Log.e(TAG, "onNewIntent,typeCheck=" + typeCheck);
         if (typeCheck == -1 || typeCheck == -2) {
             showData(Common.readFromTag(intent));
         }
     }
 
     public void onWriteBlock(View view) {
-        Common.writeTag(getInputData());
+//        Common.writeTag(getInputData());
+        Common.writeTagByMessage(ProjectHelper.getInstance().getDataFromDB(getInputData()));
     }
 
-    private String[] getInputData(){
-        String[] data = new String[4];
-        data[0] = mData1.getText().toString();
+    private String getInputData() {
+        String data = mData2.getText().toString();
         return data;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (bind!=null){
+        if (bind != null) {
             bind.unbind();
         }
     }

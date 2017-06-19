@@ -70,6 +70,24 @@ public class ProjectHelper {
         }
         return resultData;
     }
+    public String getDataFromDB(String data){
+        Log.e(TAG,"getDataFromDB,data="+data);
+        String resultData = null;
+        if (data!=null){
+            int temp = 0;
+                if (data==null|| data.equals("")){
+                    temp = 0;
+                }else {
+                    temp = saveProjectInfo(data);
+                }
+                resultData = getint2HexString(temp);
+                Log.e(TAG, "data=" + data
+                        + ",resultData=" + resultData
+                        + ",temp="+ temp);
+
+        }
+        return resultData;
+    }
 
     private String getint2HexString(int data){
         Log.e(TAG,"getHexString,data="+data);

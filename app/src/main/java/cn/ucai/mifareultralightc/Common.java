@@ -35,6 +35,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
+import android.nfc.tech.Ndef;
 import android.nfc.tech.NfcA;
 import android.os.Build;
 import android.os.Environment;
@@ -56,6 +57,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -1563,6 +1565,62 @@ public class Common extends Application {
             e.printStackTrace();
         };
         return null;
+    }
+
+    public static void writeTagByMessage(String data){
+        Ndef ndef = null;
+        try {
+            NdefRecord mimeRecord = new NdefRecord(
+                    NdefRecord.TNF_EXTERNAL_TYPE,
+                    NdefRecord.RTD_TEXT,
+//					"android/appdescriptor".getBytes(Charset.forName("UTF-8")),
+//					new byte[0], payload.getBytes(Charset.forName("UTF-8")));
+                    new byte[0], data.getBytes(Charset.forName("US-ASCII")));
+
+            NdefRecord[] records = { mimeRecord };
+            NdefMessage message = new NdefMessage(records);
+
+            // Get an instance of Ndef for the tag.
+            ndef = Ndef.get(mTag);
+
+            if (hasSpace(message, ndef)) {
+                Log.e("write","tag=开始写"+data);
+                // Enable I/O
+                ndef.connect();
+                Log.e("write","tag=开始写,message="+message.toString());
+
+                // Write the message
+                ndef.writeNdefMessage(message);
+
+                Toast.makeText(mAppContext, "TAG written", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } catch (Exception ex) {
+            Toast.makeText(mAppContext, "Could not write TAG", Toast.LENGTH_SHORT).show();
+
+        } finally {
+
+            if (ndef != null) {
+                try {
+                    ndef.close();
+                } catch (IOException e) {
+                }
+            }
+
+        }
+    }
+    public static boolean hasSpace(NdefMessage msg, Ndef tag) {
+        int maxSize = tag.getMaxSize();
+        int size = msg.toByteArray().length;
+
+        if (size > maxSize) {
+            Toast.makeText(mAppContext, "The content is too big (" + size + "/" + maxSize + ")", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 }

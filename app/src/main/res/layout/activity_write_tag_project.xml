@@ -56,7 +56,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:padding="5dp"
-                android:text="@string/text_data1"
+                android:text="原始数据"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -67,12 +67,30 @@
                 android:layout_marginRight="5dp"
                 android:layout_toRightOf="@id/textViewWriteTagData1"/>
 
+            <TextView
+                android:id="@+id/textViewWriteTagData2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editTextWriteTagData2"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/textViewWriteTagData1"
+                android:padding="5dp"
+                android:text="写入数据"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextWriteTagData2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editTextWriteTagData1"
+                android:layout_below="@id/editTextWriteTagData1"
+                android:layout_marginRight="5dp"/>
 
             <Button
                 android:id="@+id/buttonWriteTagBlock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextWriteTagData1"
+                android:layout_below="@+id/editTextWriteTagData2"
                 android:onClick="onWriteBlock"
                 android:text="@string/action_write_block" />
         </RelativeLayout>
