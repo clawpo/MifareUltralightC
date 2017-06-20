@@ -56,7 +56,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:padding="5dp"
-                android:text="原始数据"
+                android:text="产品名称:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -75,7 +75,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@id/textViewWriteTagData1"
                 android:padding="5dp"
-                android:text="写入数据"
+                android:text="所属公司:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -86,13 +86,29 @@
                 android:layout_below="@id/editTextWriteTagData1"
                 android:layout_marginRight="5dp"/>
 
+            <CheckBox
+                android:id="@+id/cb_batch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="批量录入"
+                android:layout_below="@+id/editTextWriteTagData2"
+                />
+
             <Button
                 android:id="@+id/buttonWriteTagBlock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextWriteTagData2"
+                android:layout_below="@+id/cb_batch"
                 android:onClick="onWriteBlock"
-                android:text="@string/action_write_block" />
+                android:text="单个产品录入" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buttonWriteTagBlock"
+                android:textSize="16sp"
+                android:layout_margin="10dp"
+                android:text="勾选批量录入后，NFC标签接触手机直接录入产品名称和所属公司，不需要点击录入按钮。" />
         </RelativeLayout>
     </LinearLayout>
 

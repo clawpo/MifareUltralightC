@@ -1567,7 +1567,7 @@ public class Common extends Application {
         return null;
     }
 
-    public static void writeTagByMessage(String data){
+    public static void writeTagByMessage(String[] data){
         Ndef ndef = null;
         try {
             NdefRecord mimeRecord = new NdefRecord(
@@ -1575,9 +1575,15 @@ public class Common extends Application {
                     NdefRecord.RTD_TEXT,
 //					"android/appdescriptor".getBytes(Charset.forName("UTF-8")),
 //					new byte[0], payload.getBytes(Charset.forName("UTF-8")));
-                    new byte[0], data.getBytes(Charset.forName("US-ASCII")));
+                    new byte[0], data[0].getBytes(Charset.forName("US-ASCII")));
+            NdefRecord mimeRecord2 = new NdefRecord(
+                    NdefRecord.TNF_EXTERNAL_TYPE,
+                    NdefRecord.RTD_TEXT,
+//					"android/appdescriptor".getBytes(Charset.forName("UTF-8")),
+//					new byte[0], payload.getBytes(Charset.forName("UTF-8")));
+                    new byte[1], data[1].getBytes(Charset.forName("US-ASCII")));
 
-            NdefRecord[] records = { mimeRecord };
+            NdefRecord[] records = { mimeRecord,mimeRecord2 };
             NdefMessage message = new NdefMessage(records);
 
             // Get an instance of Ndef for the tag.

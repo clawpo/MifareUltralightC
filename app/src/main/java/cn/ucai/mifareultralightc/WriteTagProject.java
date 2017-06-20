@@ -5,10 +5,13 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.Unbinder;
 import cn.ucai.mifareultralightc.local.ProjectHelper;
 
@@ -24,6 +27,9 @@ public class WriteTagProject extends BasicActivity {
     Unbinder bind;
     @BindView(R.id.editTextWriteTagData2)
     EditText mData2;
+    boolean isBatch = false;
+    @BindView(R.id.cb_batch)
+    CheckBox mCbBatch;
 
     // It is checked but the IDE don't get it.
     @SuppressWarnings("unchecked")
@@ -33,6 +39,12 @@ public class WriteTagProject extends BasicActivity {
         setContentView(R.layout.activity_write_tag_project);
         bind = ButterKnife.bind(this);
         initData();
+        mCbBatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
     }
 
     private void initData() {
@@ -53,20 +65,23 @@ public class WriteTagProject extends BasicActivity {
         initData();
     }
 
-    private void showData(String data) {
-        Log.e(TAG, "showData,data=" + data);
-        String name = ProjectHelper.getInstance().getData(data);
-        if (name != null) {
-            mData1.setText(name);
-        }
-    }
+//    private void showData(String data) {
+//        Log.e(TAG, "showData,data=" + data);
+//        String name = ProjectHelper.getInstance().getData(data);
+//        if (name != null) {
+//            mData1.setText(name);
+//        }
+//    }
 
     @Override
     public void onNewIntent(Intent intent) {
         int typeCheck = Common.treatAsNewTag(intent, this);
         Log.e(TAG, "onNewIntent,typeCheck=" + typeCheck);
         if (typeCheck == -1 || typeCheck == -2) {
-            showData(Common.readFromTag(intent));
+//            showData(Common.readFromTag(intent));
+            if (isBatch) {
+                onWriteBlock(null);
+            }
         }
     }
 
@@ -75,8 +90,10 @@ public class WriteTagProject extends BasicActivity {
         Common.writeTagByMessage(ProjectHelper.getInstance().getDataFromDB(getInputData()));
     }
 
-    private String getInputData() {
-        String data = mData2.getText().toString();
+    private String[] getInputData() {
+        String data[] = new String[2];
+        data[0] = mData1.getText().toString();
+        data[1] = mData2.getText().toString();
         return data;
     }
 
@@ -86,5 +103,10 @@ public class WriteTagProject extends BasicActivity {
         if (bind != null) {
             bind.unbind();
         }
+    }
+
+    @OnCheckedChanged(R.id.cb_batch)
+    void batchWrite(boolean isChecked) {
+        isBatch = isChecked;
     }
 }
