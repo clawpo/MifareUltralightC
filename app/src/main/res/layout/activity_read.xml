@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:tag="write_block_layout" >
+
+            <TextView
+                android:id="@+id/textViewReadTagData1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editTextReadTagData1"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:padding="5dp"
+                android:text="产品名称:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextReadTagData1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/textViewReadTagData1"/>
+
+            <TextView
+                android:id="@+id/textViewReadTagData2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editTextReadTagData2"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/textViewReadTagData1"
+                android:padding="5dp"
+                android:text="所属公司:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextReadTagData2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editTextReadTagData1"
+                android:layout_below="@id/editTextReadTagData1"
+                android:layout_marginRight="5dp"/>
+            
+            <Button
+                android:id="@+id/buttonWriteTagBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextReadTagData2"
+                android:text="返回" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

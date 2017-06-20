@@ -74,6 +74,12 @@
             android:icon="@drawable/write_tag"
             android:label="@string/title_activity_write_tag" >
         </activity>
+        <activity
+            android:name=".ReadTagProject"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:icon="@drawable/read_tag"
+            android:label="@string/title_activity_read_tag" >
+        </activity>
         <!--<activity-->
             <!--android:name=".ReadTag"-->
             <!--android:configChanges="keyboardHidden|orientation|screenSize"-->

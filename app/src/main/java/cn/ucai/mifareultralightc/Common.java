@@ -1547,19 +1547,25 @@ public class Common extends Application {
         return null;
     }
 
-    public static String readFromTag(Intent intent){
+    public static String[] readFromTag(Intent intent){
         //从一个intent得到一个标签对象
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
-
+        String[] data = new String[2];
         Parcelable[] rawArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         NdefMessage mNdefMsg = (NdefMessage)rawArray[0];
         NdefRecord mNdefRecord = mNdefMsg.getRecords()[0];
+        NdefRecord mNdefRecord2 = mNdefMsg.getRecords()[1];
         try {
             if(mNdefRecord != null){
                 String readResult = new String(mNdefRecord.getPayload(),"US-ASCII");
-                return readResult;
+                data[0] = readResult;
             }
+            if(mNdefRecord2 != null){
+                String readResult = new String(mNdefRecord2.getPayload(),"US-ASCII");
+                data[1] = readResult;
+            }
+            return data;
         }
         catch (UnsupportedEncodingException e) {
             e.printStackTrace();

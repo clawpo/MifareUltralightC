@@ -62,7 +62,7 @@ public class StartActivity extends Activity {
     }
 
     @OnClick(R.id.readTag) void readTag(){
-        Intent intent = new Intent(this, TagInfoTool.class);
+        Intent intent = new Intent(this, ReadTagProject.class);
         startActivity(intent);
     }
 

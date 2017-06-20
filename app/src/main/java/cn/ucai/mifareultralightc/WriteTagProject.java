@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import butterknife.BindView;
@@ -39,12 +38,6 @@ public class WriteTagProject extends BasicActivity {
         setContentView(R.layout.activity_write_tag_project);
         bind = ButterKnife.bind(this);
         initData();
-        mCbBatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-            }
-        });
     }
 
     private void initData() {
@@ -76,7 +69,7 @@ public class WriteTagProject extends BasicActivity {
     @Override
     public void onNewIntent(Intent intent) {
         int typeCheck = Common.treatAsNewTag(intent, this);
-        Log.e(TAG, "onNewIntent,typeCheck=" + typeCheck);
+        Log.e(TAG, "onNewIntent,typeCheck=" + typeCheck+",isBatch="+isBatch);
         if (typeCheck == -1 || typeCheck == -2) {
 //            showData(Common.readFromTag(intent));
             if (isBatch) {
@@ -107,6 +100,7 @@ public class WriteTagProject extends BasicActivity {
 
     @OnCheckedChanged(R.id.cb_batch)
     void batchWrite(boolean isChecked) {
+        Log.e(TAG, "set checkbox,isChecked="+isChecked);
         isBatch = isChecked;
     }
 }
